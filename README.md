@@ -1,5 +1,7 @@
-# BitCoin_Buddy
-![logo](/screenshots/BitCoin_Buddy_logo.png)
+<p align="center">
+  <img src="/screenshots/BitCoin_Buddy_logo.png" width="350"/>
+</p>
+
 ## Project Description
 
 BitCoin Buddy is an app utlizing React.js allowing user to set up SMS notification for user defined BitCoin price changes. 
