@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <img src="/screenshots/BitCoin_Buddy_logo.png" width="350"/>
 </p>
 
