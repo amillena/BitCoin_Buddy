@@ -21,24 +21,31 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-//var configDB = require('./config/database.js');
+var configDB = require('./config/database.js');
 
 var now = new Date();
 var start = '2016-08-01';
 var end = '2016-08-25';
 
+// Set mongoose to leverage built in JavaScript ES6 Promises
+mongoose.Promise = Promise;
 
 // configuration ===============================================================
 //mongoose.connect(configDB.url); // connect to our local database
 
 
-//Database configuration with mongoose
+
+// Database configuration with Mongoose ========================================
+// Define local MongoDB URI ====================================================
 var databaseUri = "mongodb://localhost/passport";
   if (process.env.MONGODB_URI) {
+// THIS EXCUTES IF THIS IS BEING EXCUTED IN HEROKU APP =========================	
     mongoose.connect(process.env.MONGODB_URI);
     }else{
+// THIS EXCUTES IF THIS IS BEING EXCUTED ON LOCAL MACHINE ======================
     mongoose.connect(databaseUri);
   }
+// End of Database configuration ===============================================
 
 var db = mongoose.connection;
 
@@ -114,8 +121,8 @@ var historicalPrice = JSONObject["bpi"];
 		rangePrice.push(historicalPrice[key]);
     	}
 	}
-console.log(dateLabels);
-console.log(rangePrice);
+//console.log(dateLabels);
+//console.log(rangePrice);
 
 
 //console.log(key, body.bpi[key]);
