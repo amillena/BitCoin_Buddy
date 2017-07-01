@@ -1,7 +1,6 @@
 <p align="left">
   <img src="/screenshots/BitCoin_Buddy_logo.png" width="350"/>
 </p>
-
 ## Project Description
 
 BitCoin Buddy is an app utlizing React.js allowing user to set up SMS notification for user defined BitCoin price changes. 
@@ -25,3 +24,4 @@ BitCoin Buddy is an app utlizing React.js allowing user to set up SMS notificati
 
 
 ## Heroku Link
+https://bitcoin-buddy.herokuapp.com/
