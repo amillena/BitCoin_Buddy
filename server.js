@@ -37,13 +37,13 @@ mongoose.Promise = Promise;
 
 
 // Database configuration with Mongoose ========================================
-// Define local MongoDB URI ====================================================
+// Define local MongoDB URI 
 var databaseUri = "mongodb://localhost/passport";
   if (process.env.MONGODB_URI) {
-// THIS EXCUTES IF THIS IS BEING EXCUTED IN HEROKU APP =========================	
+// THIS EXCUTES IF THIS IS BEING EXCUTED IN HEROKU APP 	
     mongoose.connect(process.env.MONGODB_URI);
     }else{
-// THIS EXCUTES IF THIS IS BEING EXCUTED ON LOCAL MACHINE ======================
+// THIS EXCUTES IF THIS IS BEING EXCUTED ON LOCAL MACHINE 
     mongoose.connect(databaseUri);
   }
 // End of Database configuration ===============================================
@@ -90,27 +90,10 @@ console.log('The magic happens on port ' + port);
 
 
 // CoinDesk API ================================================================
-var queryUrl = "http://api.coindesk.com/v1/bpi/historical/close.json?start="+start+"&end="+end;
-
-//var textMessage = "null";
-//var entryPrice = 4000;
-//console.log (process.env.TWILIO_PHONE);
-
-// CoinBase API ================================================================
-// var queryUrl = "https://api.coinbase.com/v2/prices/ETH-USD/buy";
-// var Coin = require('coinbase').Client;
-// var coin = new Coin({'apiKey': process.env.API_KEY,
-//                          'apiSecret': process.env.API_SECRET});
-
-// coin.getSpotPrice({'currencyPair': 'ETH-USD', 'date':'2010-01-01'}, function(err, price) {
-//   console.log(price);
-
-// });
-
-
 var dateLabels = [];
 var rangePrice = [];
 
+var queryUrl = "http://api.coindesk.com/v1/bpi/historical/close.json?start="+start+"&end="+end;
 request(queryUrl, function(error, response, body) {
 
 var JSONObject = JSON.parse(body);
@@ -122,45 +105,63 @@ var historicalPrice = JSONObject["bpi"];
 		rangePrice.push(historicalPrice[key]);
     	}
 	}
-//console.log(dateLabels);
-//console.log(rangePrice);
+		console.log(dateLabels);
+		console.log(rangePrice);
+});
+
+		//console.log(key, body.bpi[key]);
+		// Object.keys(body.bpi).forEach(function(key) {
+ 		// 		console.log(key, body.bpi[key]);
+		// });
 
 
-//console.log(key, body.bpi[key]);
 
-	// Object.keys(body.bpi).forEach(function(key) {
- 	// 	console.log(key, body.bpi[key]);
+
+// CoinBase API ================================================================
+var queryUrl = "https://api.coinbase.com/v2/prices/ETH-USD/buy";
+var Coin = require('coinbase').Client;
+var coin = new Coin({'apiKey': process.env.API_KEY,
+                         'apiSecret': process.env.API_SECRET});
+
+	// coin.getSpotPrice({'currencyPair': 'ETH-USD', 'date':'2010-01-01'}, function(err, price) {
+	//   console.log(price);
 	// });
 
+var textMessage = "null";
+var entryPrice = 4000;
 
-//  // If user has empty input 
-//  if(!error && response.statusCode === 200) {
-//  // Display output 
-//     var currentPrice = JSON.parse(body).data.amount;
-//     console.log("current price: $"+currentPrice);
-//     var ans = ((currentPrice - entryPrice)/entryPrice) *100;
-//     var percentChange = Math.round(ans*100)/100;
-//     var advice = " ";
+request(queryUrl, function(error, response, body) {
+ // If user has empty input 
+ 	if(!error && response.statusCode === 200) {
+ 
+ // Display output 
+    	var currentPrice = JSON.parse(body).data.amount;
+    	console.log("current price: $"+currentPrice);
+    	var ans = ((currentPrice - entryPrice)/entryPrice) *100;
+    	var percentChange = Math.round(ans*100)/100;
+    	var advice = " ";
 
-//     if (ans <= 0) {
-//       advice = " Buy now!"
-//       }
+    if (ans <= 0) {
+      advice = " Buy now!"
+      }
 
-//     if ( ans >= 20 ) {
-//       var textMessage = dateFormat(now) + "\n" + "percent change "+ percentChange + "%"+ "\n" +
-//                       "Current Price $" + currentPrice + "\n" + advice;
-//       console.log(percentChange);
-//       console.log(textMessage);
-//       sendMessage(textMessage);
-//     }else{
-//       var textMessage = dateFormat(now) + "\n"+ "percent change " + percentChange +"%"+ "\n" +
-//                       "Current Price $" + currentPrice + "\n" + advice;
-//       console.log(percentChange);
-//       console.log(textMessage);
-//       sendMessage(textMessage);
-//         }      
-//     }
+    if ( ans >= 20 ) {
+      	var textMessage = dateFormat(now) + "\n" + "percent change "+ percentChange + "%"+ "\n" +
+                      "Current Price $" + currentPrice + "\n" + advice;
+      	console.log(percentChange);
+      	console.log(textMessage);
+      	sendMessage(textMessage);
+    }else{
+      	var textMessage = dateFormat(now) + "\n"+ "percent change " + percentChange +"%"+ "\n" +
+                      "Current Price $" + currentPrice + "\n" + advice;
+      	console.log(percentChange);
+      	console.log(textMessage);
+      	sendMessage(textMessage);
+        }      
+    }
 });
+
+
 
 
 //------------Function to send text message via Twilio
@@ -175,8 +176,8 @@ client.messages.create({
 }
 
 
-var textMessage = now; 
-new CronJob('* * * * * *', function() {
-  sendMessage(textMessage);
-  console.log('You will see this message every second');
-}, null, true, 'America/Los_Angeles');
+
+// new CronJob('59 * * * * *', function() {
+//   sendMessage();
+//   console.log('You will see this message every second');
+// }, null, true, 'America/Los_Angeles');
