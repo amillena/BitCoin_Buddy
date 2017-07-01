@@ -31,7 +31,7 @@ var end = '2016-08-25';
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
-// configuration ===============================================================
+// Configuration ===============================================================
 //mongoose.connect(configDB.url); // connect to our local database
 
 
@@ -81,10 +81,10 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// routes ======================================================================
+// routes ----------------------------------------------------------------------
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-// launch ======================================================================
+// launch ----------------------------------------------------------------------
 app.listen(port);
 console.log('The magic happens on port ' + port);
 
@@ -109,16 +109,15 @@ var historicalPrice = JSONObject["bpi"];
 		console.log(rangePrice);
 });
 
+// Code used for testing code 
 		//console.log(key, body.bpi[key]);
 		// Object.keys(body.bpi).forEach(function(key) {
  		// 		console.log(key, body.bpi[key]);
 		// });
 
 
-
-
 // CoinBase API ================================================================
-var queryUrl = "https://api.coinbase.com/v2/prices/ETH-USD/buy";
+var queryUrl = "https://api.coinbase.com/v2/prices/BTC-USD/buy";
 var Coin = require('coinbase').Client;
 var coin = new Coin({'apiKey': process.env.API_KEY,
                          'apiSecret': process.env.API_SECRET});
@@ -140,7 +139,7 @@ request(queryUrl, function(error, response, body) {
     	var ans = ((currentPrice - entryPrice)/entryPrice) *100;
     	var percentChange = Math.round(ans*100)/100;
     	var advice = " ";
-
+// Composing text message based on current price and percent change
     if (ans <= 0) {
       advice = " Buy now!"
       }
@@ -161,10 +160,7 @@ request(queryUrl, function(error, response, body) {
     }
 });
 
-
-
-
-//------------Function to send text message via Twilio
+// Function to send text message via Twilio =======================================
 function sendMessage(textMessage){
 console.log(process.env.TWILIO_PHONE)
 client.messages.create({
@@ -176,8 +172,8 @@ client.messages.create({
 }
 
 
-
-// new CronJob('59 * * * * *', function() {
-//   sendMessage();
-//   console.log('You will see this message every second');
-// }, null, true, 'America/Los_Angeles');
+// Cron Scheduling Job ============================================================
+new CronJob('0 * * * * *', function() {
+  sendMessage();
+  console.log('You will see this message every hour');
+}, null, true, 'America/Los_Angeles');
