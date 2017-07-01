@@ -5,6 +5,7 @@ require('dotenv').config();
 const coindesk = require('node-coindesk-api')
 var request = require("request");
 var dateFormat = require('dateformat');
+var CronJob = require('cron').CronJob;
 
 var twilio = require('twilio');
 var client = new twilio (process.env.TWILIO_ACCOUNT_SID,process.env.TWILIO_AUTH_TOKEN); 
@@ -163,13 +164,19 @@ var historicalPrice = JSONObject["bpi"];
 
 
 //------------Function to send text message via Twilio
-// function sendMessage(textMessage){
-// console.log(process.env.TWILIO_PHONE)
-// client.messages.create({
-//     body: textMessage, 
-//     to: process.env.MY_PHONE,  // Text this number
-//     from: process.env.TWILIO_PHONE // From a valid Twilio number
-// })
-// .then((message) => console.log(message.sid))
-// }
+function sendMessage(textMessage){
+console.log(process.env.TWILIO_PHONE)
+client.messages.create({
+    body: textMessage, 
+    to: process.env.MY_PHONE,  // Text this number
+    from: process.env.TWILIO_PHONE // From a valid Twilio number
+})
+.then((message) => console.log(message.sid))
+}
 
+
+var textMessage = now; 
+new CronJob('* * * * * *', function() {
+  sendMessage(textMessage);
+  console.log('You will see this message every second');
+}, null, true, 'America/Los_Angeles');
