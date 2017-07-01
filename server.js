@@ -29,7 +29,8 @@ var end = '2016-08-25';
 
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+//mongoose.connect(configDB.url); // connect to our local database
+mongoose.connect(process.env.MONGODB_URI); // connect to our MLAB
 
 require('./config/passport')(passport); // pass passport for configuration
 
