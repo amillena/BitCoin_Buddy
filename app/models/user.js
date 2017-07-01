@@ -5,6 +5,27 @@ var bcrypt   = require('bcrypt-nodejs');
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 
+    phone: {
+        type: String,
+        validate: {
+        validator: function(v) {
+        return /\d{3}-\d{3}-\d{4}/.test(v);
+        },
+        message: 'This is not a valid phone number!'
+        },
+        required: [true, 'User phone number required']
+    },
+    initialPrice: {
+        type: Number,
+    },
+    dateBought: {
+        type: Date,
+    },
+    targetPrice: {
+        type: Number,
+        required: true
+    },
+
     local            : {
         email        : String,
         password     : String
