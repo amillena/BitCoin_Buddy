@@ -1,6 +1,7 @@
 // server.js
 // set up ======================================================================
 
+
 require('dotenv').config();
 const coindesk = require('node-coindesk-api')
 var request = require("request");
@@ -64,6 +65,7 @@ db.once("open", function() {
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
+app.use( express.static( "public" ) );
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
@@ -177,3 +179,4 @@ new CronJob('0 * * * * *', function() {
   sendMessage();
   console.log('You will see this message every hour');
 }, null, true, 'America/Los_Angeles');
+

@@ -49,7 +49,7 @@
                     <% if (user.facebook.id) { %>
                         <img src="https://graph.facebook.com/<%= user.facebook.id %>/picture">
                     <% } else { %>
-                        <img src="../assets/img/default_profile_image.png">
+                        <img src="./assets/img/default_profile_image.png">
                     <% } %>
                 <!-- check if the user has this token (is the user authenticated with this social account) -->
                 <% if (user.facebook.token) { %>
@@ -113,11 +113,22 @@
         </div>
     </div>
 
+    <div style="width:50%">
+        <canvas id="lineChart" width="400" height="400"></canvas>
+    </div>
+        <div style="width:50%">
+        <canvas id="mixedChart" width="400" height="400"></canvas>
+    </div>
+
     <div class="text-center">
         <p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
         <p>Visit the <a href="http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local">tutorial</a>.</p>
     </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+<script src="./config/chartDisplay.js"></script>
+
 </body>
 </html>
