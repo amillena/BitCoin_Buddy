@@ -9,6 +9,31 @@
     </style>
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <h4><strong>Welcome <%= user.facebook.name %>!</strong><h4>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="#">Charts</a></li>
+                </ul>
+        </div>
+    </div>
+</nav>
+
+
+
 <div class="container">
 
     <div class="page-header text-center">
@@ -19,7 +44,7 @@
 
     <div class="row">
 
-        <!-- LOCAL INFORMATION -->
+        <!-- LOCAL INFORMATION 
         <div class="col-sm-6">
             <div class="well">
                 <h3><span class="fa fa-user"></span> Local</h3>
@@ -39,7 +64,7 @@
                 <% } %>
 
             </div>
-        </div>
+        </div> -->
 
         <!-- FACEBOOK INFORMATION -->
         <div class="col-sm-6">
@@ -120,15 +145,15 @@
         <canvas id="mixedChart" width="400" height="400"></canvas>
     </div>
 
-    <div class="text-center">
+<!--     <div class="text-center">
         <p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
         <p>Visit the <a href="http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local">tutorial</a>.</p>
-    </div>
+    </div> -->
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-<script src="./config/chartDisplay.js"></script>
+<script src="assets/js/chartDisplay.js"></script>
 
 </body>
 </html>
