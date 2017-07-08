@@ -89,25 +89,26 @@ app.listen(port);
 console.log('The magic happens on port ' + port);
 
 
-// CoinDesk API ================================================================
-var dateLabels = [];
-var rangePrice = [];
+// // CoinDesk API ================================================================
+// var dateLabels = [];
+// var rangePrice = [];
 
-var queryUrl = "http://api.coindesk.com/v1/bpi/historical/close.json?start="+start+"&end="+end;
-request(queryUrl, function(error, response, body) {
+// var queryUrl = "http://api.coindesk.com/v1/bpi/historical/close.json?start="+start+"&end="+end;
+// request(queryUrl, function(error, response, body) {
 
-var JSONObject = JSON.parse(body);
-var historicalPrice = JSONObject["bpi"];
+// var JSONObject = JSON.parse(body);
+// var historicalPrice = JSONObject["bpi"];
 
-	for (key in historicalPrice) {
-    	if (historicalPrice.hasOwnProperty(key)) {
-    	dateLabels.push(key);	
-		rangePrice.push(historicalPrice[key]);
-    	}
-	}
-		//console.log(dateLabels);
-		//console.log(rangePrice);
-});// End of function  =========================================================
+// 	for (key in historicalPrice) {
+//     	if (historicalPrice.hasOwnProperty(key)) {
+//     	dateLabels.push(key);	
+// 		rangePrice.push(historicalPrice[key]);
+//     	}
+// 	}
+  
+// 		//console.log(dateLabels);
+// 		//console.log(rangePrice);
+// });// End of function  =========================================================
 
 // Code used for testing code 
 		//console.log(key, body.bpi[key]);
