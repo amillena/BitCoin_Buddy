@@ -24,8 +24,8 @@ var session      = require('express-session');
 var configDB = require('./config/database.js');
 
 var now = new Date();
-var start = '2016-08-01';
-var end = '2016-08-25';
+// var start = '2016-08-01';
+// var end = '2016-08-25';
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
